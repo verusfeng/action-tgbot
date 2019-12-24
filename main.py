@@ -62,5 +62,5 @@ if __name__ == '__main__':
     li = get_img_list()
     if len(li) != 0:
         for each in li:
-            sendFile(each.strip())
+            sendFile(each.strip())   # sendText2(each.strip())
             time.sleep(1)
