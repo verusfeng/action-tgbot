@@ -38,11 +38,14 @@ def get_img_list():
     if r0.status_code == 200:
         for each in r0.cookies.keys():
             cookies[each] = r0.cookies.get(each)
-    
+    else:
+        return []
+
     r0 = requests.get(url=img_api,headers=headers,cookies=cookies)
     if r0.status_code == 200:
         return [item["canonical_url"] for item in r0.json()["data"]]
-         
+    else:
+        return [] 
   
 
 
@@ -51,7 +54,7 @@ if __name__ == '__main__':
     sendText("In function....")
     sendText2("https://www.google.com")
     li = get_img_list()
-    if li is not None:
+    if len(li) != 0:
         for each in li:
             sendText2(each.strip())
             time.sleep(1)
