@@ -2,3 +2,7 @@ tcl/
 Scripts/
 Lib/
 Include/
+
+*.tmp
+*.bat
+*.sh
