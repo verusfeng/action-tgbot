@@ -51,7 +51,7 @@ if __name__ == '__main__':
     sendText("In function....")
     sendText2("https://www.google.com")
     li = get_img_list()
-    if li not None:
+    if li is not None:
         for each in li:
-            sendText2(each.Strip())
+            sendText2(each.strip())
             time.sleep(1)
