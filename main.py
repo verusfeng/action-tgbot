@@ -47,14 +47,20 @@ def get_img_list():
     else:
         return [] 
   
-
+def sendFile(fileUrl):
+    ## sending by URL will currently only work for gif, pdf and zip files
+    send_doc = fileUrl.strip()
+    sendDOCAPI = rf"https://api.telegram.org/bot{bot_token}/sendDocument?chat_id={myid}&document={send_doc}"
+    r = requests.get(sendDOCAPI)
+    print(r.status_code) 
 
 
 if __name__ == '__main__':
-    sendText("In function....")
-    sendText2("https://www.google.com")
+    #sendText("In function....")
+    #sendText2("https://www.google.com")
+    sendText2("Action start....")
     li = get_img_list()
     if len(li) != 0:
         for each in li:
-            sendText2(each.strip())
+            sendFile(each.strip())
             time.sleep(1)
