@@ -58,9 +58,12 @@ def sendFile(fileUrl):
 if __name__ == '__main__':
     #sendText("In function....")
     #sendText2("https://www.google.com")
-    sendText2("Action start....")
     li = get_img_list()
+
+    sendText2(f"Action start....,get len is {len(li)}")
+    
     if len(li) != 0:
         for each in li:
-            sendFile(each.strip())   # sendText2(each.strip())
-            time.sleep(1)
+            if each is not None:
+                sendFile(each.strip())   # sendText2(each.strip())
+                time.sleep(1)
