@@ -3,6 +3,9 @@ Scripts/
 Lib/
 Include/
 
+tmp/
+
+
 *.tmp
 *.bat
 *.sh

@@ -67,3 +67,5 @@ if __name__ == '__main__':
             if each is not None:
                 sendFile(each.strip())   # sendText2(each.strip())
                 time.sleep(1)
+                
+    sendText2(f"Action Finish, {time.ctime()}")
