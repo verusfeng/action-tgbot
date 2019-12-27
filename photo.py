@@ -26,7 +26,7 @@ def get_photo_list():
     if r.status_code == 200:
         for ei in r.json()["data"]["items"]:
             for url in ei["item"]["pictures"]:
-                print(url["img_src"])
+                # print(url["img_src"])
                 kl.append(url["img_src"])
         return kl
     else:
@@ -65,12 +65,14 @@ def sendFile(fileUrl):
 
 
 def main():
-    # bot_send_message(f"Action start! {time.ctime()} ")  # ok
     l = get_photo_list()  ## ok
+    bot_send_message(f"Action start! {time.ctime()} url len {len(l)}")  # ok
 
-    print(len(l))
-    for each in l:
+    for each in l[:40]:
         sendFile(each)
+        time.sleep(1/10)
+    bot_send_message(f"Action Finish!")   
+
     exit(0)
 
     
