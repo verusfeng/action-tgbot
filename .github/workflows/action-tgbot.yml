@@ -1,22 +1,26 @@
-name: 'action-tgbot'
+name: 'tgbot'  
 
-on: 
+on:
+  push: 
   schedule:
-    - cron: '0 * * * *' ## utc + 8 @ 20:00 every day
+    - cron: '0 0,6,12,18 * * *' ## 
+    ##- cron: '0 18 * * *' ## 
+    ##- cron: '0 0 * * *' ## 
+    ##- cron: '0 6 * * *' ##  
       
-
+ 
 jobs:
   bot:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.7]
+        python-version: [3.7]  ## python version
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: verusfeng/checkout@v1
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
+      uses: verusfeng/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
