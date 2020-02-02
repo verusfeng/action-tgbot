@@ -64,13 +64,26 @@ def sendFile(fileUrl):
     print(r.status_code) 
 
 
+def sendPhoto(fileUrl):
+    ## sending by URL will currently only work for gif, pdf and zip files
+    send_photo = fileUrl.strip()
+    sendPHOTOAPI = rf"https://api.telegram.org/bot{bot_token}/sendPhoto?chat_id={myid}&photo={send_photo}" 
+    r = requests.get(sendPHOTOAPI)
+    print("Photo", r.status_code) 
+    return r.status_code == 200
+
+
 def main():
     l = get_photo_list()  ## ok
     bot_send_message(f"Action start! {time.ctime()} url len {len(l)}")  # ok
 
     for each in l[:40]:
-        sendFile(each)
+        if sendPhoto(each):
+            pass
+        else:
+            sendFile(each)
         time.sleep(1/10)
+
     bot_send_message(f"Action Finish!")   
 
     exit(0)

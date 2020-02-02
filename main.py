@@ -3,6 +3,10 @@ import os
 import requests
 import time
 
+'''
+anime photo 
+
+'''
 myid = os.getenv("TARGET_CHAT_ID")
 bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
 
@@ -52,8 +56,15 @@ def sendFile(fileUrl):
     send_doc = fileUrl.strip()
     sendDOCAPI = rf"https://api.telegram.org/bot{bot_token}/sendDocument?chat_id={myid}&document={send_doc}"
     r = requests.get(sendDOCAPI)
-    print(r.status_code) 
+    print("File" ,r.status_code) 
 
+def sendPhoto(fileUrl):
+    ## sending by URL will currently only work for gif, pdf and zip files
+    send_photo = fileUrl.strip()
+    sendPHOTOAPI = rf"https://api.telegram.org/bot{bot_token}/sendPhoto?chat_id={myid}&photo={send_photo}" 
+    r = requests.get(sendPHOTOAPI)
+    print("Photo", r.status_code) 
+    return r.status_code == 200
 
 if __name__ == '__main__':
     #sendText("In function....")
@@ -65,7 +76,10 @@ if __name__ == '__main__':
     if len(li) != 0:
         for each in li:
             if each is not None:
-                sendFile(each.strip())   # sendText2(each.strip())
+                if sendPhoto(each.strip()):
+                    pass
+                else:
+                    sendFile(each.strip())   # sendText2(each.strip())
                 time.sleep(1)
                 
     sendText2(f"Action Finish, {time.ctime()}")
