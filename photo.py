@@ -32,29 +32,6 @@ def get_photo_list():
     else:
         return []  ## error return empty list .
 
-# def bot_send_media_group(media):
-#     r= requests.get(f"https://api.telegram.org/bot{token}/sendMediaGroup?chat_id={target_id}&media={media}",proxies=proxies)
-#     print("bot_send_media_group", r.status_code)
-#     print(r.text)
-#     return 
-# ## Fail while testing...
-
-
-# def send_list(url_list):
-#     if len(url_list) == 0:
-#         bot_send_message("list len is 0...")
-#         return 
-#     for i in range(0,3):
-#         img_array = []
-#         for each in url_list[i*10:10*(i+1)]:
-#             img_item = {
-#             "type":"photo",
-#             "media":each
-#             }
-#             img_array.append(img_item)
-#         send_data = json.dumps(img_array)
-#         bot_send_media_group(send_data)
-#     return 
 
 def sendFile(fileUrl):
     ## sending by URL will currently only work for gif, pdf and zip files
@@ -67,23 +44,62 @@ def sendFile(fileUrl):
 def sendPhoto(fileUrl):
     ## sending by URL will currently only work for gif, pdf and zip files
     send_photo = fileUrl.strip()
-    sendPHOTOAPI = rf"https://api.telegram.org/bot{bot_token}/sendPhoto?chat_id={myid}&photo={send_photo}" 
+    sendPHOTOAPI = rf"https://api.telegram.org/bot{bot_token}/sendPhoto?chat_id={target_id}&photo={send_photo}" 
     r = requests.get(sendPHOTOAPI)
     print("Photo", r.status_code) 
     return r.status_code == 200
 
 
+
+
+
+'''
+
+'''
+
+def bot_send_media_group(media):
+    try_times = 0 
+    while True:      
+        r= requests.get(rf"https://api.telegram.org/bot{token}/sendMediaGroup?chat_id={target_id}&media={media}",proxies=proxies)
+        print("bot_send_media_group", r.status_code, "times is", try_times)
+        time.sleep(1)
+        if r.status_code == 200 or try_times > 2 :
+            ## send ok , return ; retry 3 times return .
+            return
+        else:
+            try_times+=1  
+
+    return 
+
+def send_list(url_list):
+    if len(url_list) == 0:
+        bot_send_message("list len is 0...")
+        return 
+    loop_end = len(url_list) // 9
+    for i in range(0,loop_end):
+        img_array = []
+        for each in url_list[i*9:9*(i+1)]:
+            img_item = {
+            "type":"photo",
+            "media":each
+            }
+            img_array.append(img_item)
+        send_data = json.dumps(img_array)
+        bot_send_media_group(send_data)
+    return 
+
+###################################################
 def main():
     l = get_photo_list()  ## ok
     bot_send_message(f"Action start! {time.ctime()} url len {len(l)}")  # ok
-
-    for each in l[:40]:
-        if sendPhoto(each):
-            pass
-        else:
-            sendFile(each)
-        time.sleep(1/10)
-
+    #   ## send files. 
+    # for each in l[:40]:
+    #     if sendPhoto(each):
+    #         pass
+    #     else:
+    #         sendFile(each)
+    #     time.sleep(1/10)
+    send_list(l)
     bot_send_message(f"Action Finish!")   
 
     exit(0)
