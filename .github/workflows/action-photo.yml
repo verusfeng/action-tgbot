@@ -1,7 +1,7 @@
 name: 'photo'
 
 on: 
-  push:
+  # push:
   schedule:
     - cron: '0 1,9,17 * * *' ## utc + 8 @ 20:00 every day
       
