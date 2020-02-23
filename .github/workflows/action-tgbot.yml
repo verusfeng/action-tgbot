@@ -3,7 +3,7 @@ name: 'tgbot'
 on:
   push:
     branches:
-      - branch_trigger
+      - master
   # pull_request:
     # branches:
       # - master
