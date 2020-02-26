@@ -76,7 +76,7 @@ if __name__ == '__main__':
     if len(li) != 0:
         for each in li:
             if each is not None and "." in each:
-                sub_ext = each.split(".")[1]
+                sub_ext = each.split(".")[-1]
             else:
                 sub_ext = None 
 
