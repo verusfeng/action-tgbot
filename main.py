@@ -56,14 +56,14 @@ def sendFile(fileUrl):
     send_doc = fileUrl.strip()
     sendDOCAPI = rf"https://api.telegram.org/bot{bot_token}/sendDocument?chat_id={myid}&document={send_doc}"
     r = requests.get(sendDOCAPI)
-    print("File" ,r.status_code) 
+    print(f"File-{r.status_code}-{send_doc}" ) 
 
 def sendPhoto(fileUrl):
     ## sending by URL will currently only work for gif, pdf and zip files
     send_photo = fileUrl.strip()
     sendPHOTOAPI = rf"https://api.telegram.org/bot{bot_token}/sendPhoto?chat_id={myid}&photo={send_photo}" 
     r = requests.get(sendPHOTOAPI)
-    print("Photo", r.status_code) 
+    print(f"Photo-{r.status_code}-{send_photo}", ) 
     return r.status_code == 200
 
 if __name__ == '__main__':
