@@ -47,7 +47,7 @@ def get_img_list():
 
     r0 = requests.get(url=img_api,headers=headers,cookies=cookies)
     if r0.status_code == 200:
-        return [item["canonical_url"] for item in r0.json()["data"]]
+        return [item["url"] for item in r0.json()["data"]]  ## canonical_url change to url
     else:
         return [] 
   
