@@ -2,4 +2,5 @@
 ...
 Update API
 
-22 
+22 The current time is: 23:17:50.59
+Enter the new time: 
