@@ -86,5 +86,5 @@ if __name__ == '__main__':
                 else:
                     sendFile(each.strip())   # sendText2(each.strip())
                 time.sleep(1)
-    sendText2(f"Get len is {len(li)} at {time.ctime()}")               
+    sendText2(f"{len(li)} at {time.ctime()}")               
     # #sendText2(f"Action Finish, {time.ctime()}")

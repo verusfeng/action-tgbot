@@ -100,7 +100,7 @@ def main():
     #         sendFile(each)
     #     time.sleep(1/10)
     send_list(l)
-    bot_send_message(f"Action Finish!")   
+    ## bot_send_message(f"Action Finish!")   
 
     exit(0)
 
